@@ -1,4 +1,4 @@
-import ImporterAPI from './api';
+import ImporterAPI from '../api';
 import React, { Components } from "react";
 const API = new ImporterAPI();
 
