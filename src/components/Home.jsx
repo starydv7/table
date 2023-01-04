@@ -1,29 +1,21 @@
-import ImporterAPI from '../api';
-import React, { Components } from "react";
-const API = new ImporterAPI();
+import React, { Component } from 'react'
 
-class Home extends Components {
+class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      data: ''
-  }}
-
-  componentWillMount() {
-    this.setState({ data: API.getData()}, () => {
-      console.log("data fetched");
-      var mapData = []
-      this.state.data.map( (object, i) => {
-        mapData.push(<p key={i}>{object}</p>)
-      })
-  }) 
+    this.state = { users: [] };
   }
-  render() {
-    return (
-      <div className="home">
-        {this.mapData}
-      </div>
-    )
+  componentDidMount() {
+    fetch("https://dummyjson.com/users")
+      .then((response) => response.json())
+      .then((data) => {
+        const data2 = data.results;
+        this.setState({ users: data2 });
+      });
+  }
+    render() {
+        console.log(this.data.users);
+    return <div>Home</div>;
   }
 }
 export default Home;
