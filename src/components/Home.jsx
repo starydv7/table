@@ -1,21 +1,48 @@
-import React, { Component } from 'react'
-
-class Home extends Component {
+import React, { Component } from "react";
+class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { users: [] };
+    this.state = {
+      customers: [],
+    };
   }
   componentDidMount() {
-    fetch("https://dummyjson.com/users")
-      .then((response) => response.json())
-      .then((data) => {
-        const data2 = data.results;
-        this.setState({ users: data2 });
-      });
+    fetch(
+      "https://raw.githubusercontent.com/aspsnippets/test/master/Customers.json"
+    )
+      .then((res) => res.json())
+      .then(
+        (customers) => {
+          this.setState({ customers: customers });
+        },
+        (error) => {
+          alert(error);
+        }
+      );
   }
-    render() {
-        console.log(this.data.users);
-    return <div>Home</div>;
+
+  render() {
+    return (
+      <table cellPadding="0" cellSpacing="0">
+        <thead>
+          <tr>
+            <th>CustomerId</th>
+            <th>Name</th>
+            <th>Country</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {this.state.customers.map((customer) => (
+            <tr>
+              <td>{customer.CustomerId}</td>
+              <td>{customer.Name}</td>
+              <td>{customer.Country}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
   }
 }
 export default Home;
