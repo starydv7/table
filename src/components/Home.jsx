@@ -1,26 +1,29 @@
-import React, { Component } from 'react'
-import ReactTable from "react-table";
-class Home extends Component {
-  state = {
-    books: [],
-  };
-  componentDidMount() {
-    fetch("https://dummyjson.com/users")
-      .then((response) => response.json())
-      .then((booksList) => {
-        this.setState({ books: booksList });
-        //console.log(booksList);
-      });
+import ImporterAPI from './api';
+import React, { Components } from "react";
+const API = new ImporterAPI();
+
+class Home extends Components {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: ''
+  }}
+
+  componentWillMount() {
+    this.setState({ data: API.getData()}, () => {
+      console.log("data fetched");
+      var mapData = []
+      this.state.data.map( (object, i) => {
+        mapData.push(<p key={i}>{object}</p>)
+      })
+  }) 
   }
-    render() {
-        console.log("Books",this.state.books.users);
+  render() {
     return (
-      <ul>
-        {this.state.books.map((book) => (
-          <li key={book.id}>{book.firstName}</li>
-        ))}
-      </ul>
-    );
+      <div className="home">
+        {this.mapData}
+      </div>
+    )
   }
 }
 export default Home;
