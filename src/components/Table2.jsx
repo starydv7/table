@@ -13,22 +13,32 @@ import {
 class Table2 extends Component {
   constructor() {
     super();
-    this.state = { items: [] };
+    this.state = { person: [] };
     console.log("test");
   }
+  //   componentDidMount() {
+  //     fetch("https://jsonplaceholder.typicode.com/users")
+  //       .then((res) => res.json())
+  //       .then((res) => {
+  //         // console.log(res.results);
+  //           console.log(res);
+
+  //                this.setState({items: res.results});
+
+  //       });
+  //   }
   componentDidMount() {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((res) => res.json())
-      .then((res) => {
-        // console.log(res.results);
-          console.log(res);
-        
-               this.setState({items: res.results});
-               
+    fetch("https://randomuser.me/api/?results=500")
+      .then((response) => response.json())
+      .then((resData) => {
+        //console.log(JSON.stringify(resData))
+        //do your logic here
+        //let person = resData.results
+        this.setState({ person: resData.results }); //this is an asynchronous function
       });
   }
 
-    render() {
+  render() {
     return (
       <div className={styles.container}>
         <Table variant="simple">
@@ -37,18 +47,25 @@ class Table2 extends Component {
             <Tr>
               <Th>S.No</Th>
               <Th>Name</Th>
-              <Th>UserName</Th>
-                        <Th>Email</Th>
-                        <Th>Phone Number</Th>
-                        <Th>Website</Th>
+              <Th>Gender</Th>
+              <Th>Email</Th>
+              <Th>Phone Number</Th>
+              <Th>Street Name</Th>
             </Tr>
           </Thead>
-                <Tbody>
-                    {this.state.items.map((item, i) => {
-                        return( <Tr>
-                            {item.id}
-                      </Tr>
-                  )})}
+          <Tbody>
+            {this.state.person.map((personRecord) => {
+              return (
+                <Tr key={personRecord.id.value}>
+                  <Td> {personRecord.id.value} </Td>
+                  <Td> {personRecord.name.first} </Td>
+                  <Td> {personRecord.gender} </Td>
+                  <Td> {personRecord.email} </Td>
+                  <Td> {personRecord.location.street.number} </Td>
+                  <Td> {personRecord.location.street.name} </Td>
+                </Tr>
+              );
+            })}
             <Tr>
               <Td></Td>
               <Td>millimetres (mm)</Td>
