@@ -32,18 +32,25 @@ class Table2 extends Component {
     return (
       <div className={styles.container}>
         <Table variant="simple">
-          <TableCaption>Imperial to metric conversion factors</TableCaption>
+          <TableCaption>User Detail</TableCaption>
           <Thead>
             <Tr>
-              <Th>To convert</Th>
-              <Th>into</Th>
-              <Th isNumeric>multiply by</Th>
-              <Th isNumeric>Total</Th>
+              <Th>S.No</Th>
+              <Th>Name</Th>
+              <Th>UserName</Th>
+                        <Th>Email</Th>
+                        <Th>Phone Number</Th>
+                        <Th>Website</Th>
             </Tr>
           </Thead>
-          <Tbody>
+                <Tbody>
+                    {this.state.items.map((item, i) => {
+                        return( <Tr>
+                            {item.id}
+                      </Tr>
+                  )})}
             <Tr>
-              <Td>inches</Td>
+              <Td></Td>
               <Td>millimetres (mm)</Td>
               <Td isNumeric>25.4</Td>
             </Tr>
