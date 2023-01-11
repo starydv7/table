@@ -21,9 +21,12 @@ class Home extends React.Component {
       );
   }
 
+
+
+
   render() {
     return (
-      <table cellPadding="0" cellSpacing="0">
+      <table cellPadding="0" cellSpacing="1">
         <thead>
           <tr>
             <th>CustomerId</th>
